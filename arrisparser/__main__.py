@@ -9,6 +9,10 @@ from .parser import from_html_string
 app = Flask(__name__)
 
 
+def clean_address(address):
+    return address.replace('.', '_')
+
+
 @app.route('/<prefix>/<address>')
 def prometheus(prefix, address):
     url = f'http://{address}/cgi-bin/status'
@@ -17,6 +21,9 @@ def prometheus(prefix, address):
 
     data = from_html_string(doc_contents)
     response = []
+
+    # Clean up the address so Prometheus can parse it
+    address = clean_address(address)
 
     for ch in data['DownstreamBondedChannels']:
         for numeric in [
