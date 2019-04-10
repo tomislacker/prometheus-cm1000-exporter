@@ -9,6 +9,14 @@ from .parser import from_html_string
 app = Flask(__name__)
 
 
+COUNTER_TYPES = [
+    'Correted',
+    'Uncorrectables',
+]
+"""Define counter type bits of data"""
+# Ref: https://prometheus.io/docs/instrumenting/writing_exporters/
+
+
 def clean_address(address):
     return address.replace('.', '_')
 
@@ -39,7 +47,8 @@ def prometheus(prefix, address):
                     prefix=prefix,
                     address=address,
                     ch=str(int(ch["Channel"])),
-                    name=numeric.lower(),
+                    name=numeric.lower()
+                    + '_total' if numeric in COUNTER_TYPES else '',
                     val=ch[numeric],
                 ))
 
