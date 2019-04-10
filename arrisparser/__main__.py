@@ -34,6 +34,10 @@ def prometheus(prefix, address):
     address = clean_address(address)
 
     for ch in data['DownstreamBondedChannels']:
+        response.append('# ' + ' '.join([
+            f'{k}={v}'
+            for k, v in ch.items()
+        ]))
         for numeric in [
                 'ChannelID',
                 'Corrected',
@@ -43,12 +47,11 @@ def prometheus(prefix, address):
                 'Uncorrectables',
                 ]:
             response.append(
-                '{prefix}_{address}_downstream_ch{ch}_{name} {val} '.format(
+                '{prefix}_{address}_downstream_{name}{{channel="{ch}"}} {val} '.format(
                     prefix=prefix,
                     address=address,
                     ch=str(int(ch["Channel"])),
-                    name=numeric.lower()
-                    + '_total' if numeric in COUNTER_TYPES else '',
+                    name=numeric.lower() + ('_total' if numeric in COUNTER_TYPES else ''),
                     val=ch[numeric],
                 ))
 
@@ -61,6 +64,10 @@ def prometheus(prefix, address):
     )
 
     for ch in data['UpstreamBondedChannels']:
+        response.append('# ' + ' '.join([
+            f'{k}={v}'
+            for k, v in ch.items()
+        ]))
         for numeric in [
                 'ChannelID',
                 'Frequency',
@@ -68,7 +75,7 @@ def prometheus(prefix, address):
                 'SymbolRate',
                 ]:
             response.append(
-                '{prefix}_{address}_upstream_ch{ch}_{name} {val} '.format(
+                '{prefix}_{address}_upstream_{name}{{channel="{ch}"}} {val} '.format(
                     prefix=prefix,
                     address=address,
                     ch=str(int(ch["Channel"])),
