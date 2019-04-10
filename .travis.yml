@@ -1,0 +1,13 @@
+---
+language: python
+python: 3.6
+env:
+  - TOX_ENV=py36
+
+install:
+  - pip install tox
+
+script:
+  - tox -e $TOX_ENV
+
+# vim: ft=yaml sw=2 ts=2
