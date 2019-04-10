@@ -1,0 +1,11 @@
+# Ignore everything
+**
+
+# Allow Dockerfile
+!Dockerfile
+
+# Allow code
+!arrisparser/**
+
+# Allow requirementst
+!requirements.txt
