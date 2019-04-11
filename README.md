@@ -2,6 +2,8 @@
 
 ## About
 [![Build Status](https://travis-ci.org/tomislacker/prometheus-arris-exporter.svg?branch=master)](https://travis-ci.org/tomislacker/prometheus-arris-exporter)
+[![](https://images.microbadger.com/badges/image/tomislacker/arris-parser.svg)](https://microbadger.com/images/tomislacker/arris-parser "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/tomislacker/arris-parser.svg)](https://microbadger.com/images/tomislacker/arris-parser "Get your own version badge on microbadger.com")
 
 This project was created because my ISP locks down SNMP on my
 [Arris SB6190](https://www.arris.com/surfboard/products/cable-modems/sb6190/)
